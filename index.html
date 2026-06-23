@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Prabhu Chandran — Senior Flutter Engineer | Mobile Architect | Real-Time Systems. 10+ years building scalable mobile apps."/>
+<title>Prabhu Chandran — Senior Flutter Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #0A0A0F;
+    --surface: #111118;
+    --panel: #16161F;
+    --muted: #2A2A38;
+    --border: rgba(255,255,255,0.07);
+    --text: #E8E8F0;
+    --sub: #7A7A95;
+    --accent: #6C63FF;
+    --accent2: #00D4AA;
+    --accent-glow: rgba(108,99,255,0.15);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.25rem 3rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.1rem;
+    color: #fff; letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--sub); font-size: 0.85rem; letter-spacing: 0.08em;
+    text-transform: uppercase; text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: #fff; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    padding: 8rem 3rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(108,99,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(108,99,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 0%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 0%, transparent 100%);
+  }
+  .hero-orb {
+    position: absolute; top: -10%; right: -5%;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(108,99,255,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+    position: relative; z-index: 1;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 40px; height: 1px; background: var(--accent);
+  }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 800; line-height: 1.0;
+    color: #fff; letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    position: relative; z-index: 1;
+  }
+  h1 .accent-word { color: var(--accent); }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--sub); max-width: 520px;
+    font-weight: 300; line-height: 1.8; margin-bottom: 2.5rem;
+    position: relative; z-index: 1;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 2rem; border-radius: 4px;
+    background: var(--accent); color: #fff;
+    font-size: 0.9rem; font-weight: 500; letter-spacing: 0.02em;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.85rem 2rem; border-radius: 4px;
+    background: transparent; color: var(--text);
+    border: 1px solid rgba(255,255,255,0.15);
+    font-size: 0.9rem; letter-spacing: 0.02em;
+    text-decoration: none; cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.4); transform: translateY(-1px); }
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    padding-top: 2.5rem; border-top: 1px solid var(--border);
+    position: relative; z-index: 1;
+    flex-wrap: wrap;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 2rem; color: #fff;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--sub); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  /* SECTIONS */
+  section { padding: 6rem 3rem; }
+  .section-eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-eyebrow::before {
+    content: ''; width: 30px; height: 1px; background: var(--accent);
+  }
+  h2 {
+    font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800; color: #fff; letter-spacing: -0.02em; margin-bottom: 3rem;
+  }
+  h3 {
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.15rem;
+    color: #fff; margin-bottom: 0.4rem;
+  }
+
+  /* SKILLS */
+  #skills { background: var(--surface); }
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.75rem; transition: border-color 0.25s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .skill-icon {
+    width: 40px; height: 40px; border-radius: 8px;
+    background: var(--accent-glow); display: flex; align-items: center;
+    justify-content: center; margin-bottom: 1rem; font-size: 1.2rem;
+  }
+  .skill-title { font-size: 0.85rem; font-weight: 500; color: var(--sub); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag {
+    font-size: 0.75rem; padding: 0.3rem 0.75rem; border-radius: 20px;
+    background: rgba(108,99,255,0.1); color: var(--accent);
+    border: 1px solid rgba(108,99,255,0.2); white-space: nowrap;
+  }
+  .tag.green { background: rgba(0,212,170,0.08); color: var(--accent2); border-color: rgba(0,212,170,0.2); }
+
+  /* EXPERIENCE */
+  #experience { background: var(--ink); }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 8px; bottom: 8px;
+    width: 1px; background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+  .timeline-item { position: relative; margin-bottom: 3.5rem; padding-left: 2rem; }
+  .timeline-dot {
+    position: absolute; left: -2rem; top: 6px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 12px var(--accent);
+    transform: translateX(-50%);
+  }
+  .timeline-item:not(:first-child) .timeline-dot { background: var(--muted); box-shadow: none; }
+  .timeline-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .timeline-meta { font-size: 0.8rem; color: var(--sub); white-space: nowrap; }
+  .timeline-company { font-size: 0.85rem; color: var(--accent2); margin-bottom: 0.75rem; }
+  .timeline-bullets { list-style: none; margin-top: 0.75rem; }
+  .timeline-bullets li { font-size: 0.875rem; color: var(--sub); padding: 0.2rem 0; padding-left: 1rem; position: relative; }
+  .timeline-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.75rem; }
+
+  /* PROJECTS */
+  #projects { background: var(--surface); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+    padding: 2rem; display: flex; flex-direction: column; gap: 1rem;
+    transition: border-color 0.25s, transform 0.2s; cursor: pointer;
+  }
+  .project-card:hover { border-color: var(--accent2); transform: translateY(-3px); }
+  .project-num { font-size: 0.72rem; color: var(--sub); letter-spacing: 0.15em; font-family: 'Syne', sans-serif; }
+  .project-name { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: #fff; }
+  .project-desc { font-size: 0.875rem; color: var(--sub); flex: 1; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .project-arrow { font-size: 1.2rem; color: var(--accent); align-self: flex-end; margin-top: auto; }
+
+  /* CONTACT */
+  #contact {
+    background: var(--ink); text-align: center;
+    padding: 7rem 3rem;
+  }
+  #contact .section-eyebrow { justify-content: center; }
+  #contact h2 { margin-bottom: 1rem; }
+  #contact p { color: var(--sub); max-width: 480px; margin: 0 auto 3rem; }
+  .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.8rem 1.75rem; border-radius: 4px;
+    border: 1px solid var(--border); color: var(--text);
+    font-size: 0.875rem; text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* FOOTER */
+  footer {
+    background: var(--surface); padding: 2rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--sub);
+    flex-wrap: wrap; gap: 1rem;
+  }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 7rem 1.5rem 3rem; }
+    .hero-stats { gap: 2rem; }
+    footer { padding: 1.5rem; flex-direction: column; }
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--ink); }
+  ::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">PC</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-eyebrow">Senior Flutter Engineer</div>
+  <h1>Building mobile<br>futures <span class="accent-word">pixel</span><br>by pixel.</h1>
+  <p class="hero-sub">10+ years crafting production-grade mobile apps. Expert in Flutter, real-time systems, and clean architecture — from concept to App Store.</p>
+  <div class="hero-cta">
+    <a href="#contact" class="btn-primary">Get in touch →</a>
+    <a href="#experience" class="btn-outline">View experience</a>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-num">10+</div><div class="stat-label">Years experience</div></div>
+    <div><div class="stat-num">4–8</div><div class="stat-label">Engineers led</div></div>
+    <div><div class="stat-num">iOS + Android</div><div class="stat-label">Platform reach</div></div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-eyebrow">Expertise</div>
+  <h2>Core technical skills</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">📱</div>
+      <div class="skill-title">Mobile</div>
+      <div class="skill-tags">
+        <span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">Android</span><span class="tag">Kotlin</span><span class="tag">Java</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🏛</div>
+      <div class="skill-title">Architecture</div>
+      <div class="skill-tags">
+        <span class="tag">BLoC</span><span class="tag">MVVM</span><span class="tag">Clean Arch</span><span class="tag">Modular Design</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">⚡</div>
+      <div class="skill-title">Backend & APIs</div>
+      <div class="skill-tags">
+        <span class="tag green">FastAPI</span><span class="tag green">WebSockets</span><span class="tag green">REST APIs</span><span class="tag green">Laravel</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🗄</div>
+      <div class="skill-title">Databases</div>
+      <div class="skill-tags">
+        <span class="tag green">MongoDB</span><span class="tag green">Redis</span><span class="tag green">MySQL</span><span class="tag green">SQLite</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">☁</div>
+      <div class="skill-title">Cloud & Infra</div>
+      <div class="skill-tags">
+        <span class="tag">Firebase</span><span class="tag">GCP</span><span class="tag">AWS EC2</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🎯</div>
+      <div class="skill-title">Leadership</div>
+      <div class="skill-tags">
+        <span class="tag">Tech Mentorship</span><span class="tag">Code Review</span><span class="tag">Team Lead</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-eyebrow">Career</div>
+  <h2>Professional experience</h2>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-header">
+        <h3>Senior Mobile Engineer / Junior Tech Lead</h3>
+        <span class="timeline-meta">Jan 2025 – Present</span>
+      </div>
+      <div class="timeline-company">FairPay TechWorks</div>
+      <ul class="timeline-bullets">
+        <li>Architected WorkBench, a production-grade real-time communication platform using Flutter, WebSockets &amp; Firebase</li>
+        <li>Integrated FastAPI with Redis and MongoDB on AWS EC2 and GCP for low-latency, high-throughput messaging</li>
+        <li>Designed scalable BLoC-based clean architecture enabling modular feature development</li>
+        <li>Led and mentored a team of 4–8 engineers, enforcing code quality standards and best practices</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-header">
+        <h3>Senior Software Engineer</h3>
+        <span class="timeline-meta">Jun 2021 – Dec 2024</span>
+      </div>
+      <div class="timeline-company">Tender Software</div>
+      <ul class="timeline-bullets">
+        <li>Shipped Flutter and Android applications across multiple business domains</li>
+        <li>Designed reusable architecture leveraging MVVM and BLoC state management patterns</li>
+        <li>Managed production deployments, release cycles, and post-release monitoring</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-header">
+        <h3>Founder &amp; Mobile Engineer</h3>
+        <span class="timeline-meta">Jul 2019 – Jun 2021</span>
+      </div>
+      <div class="timeline-company">Self Product</div>
+      <ul class="timeline-bullets">
+        <li>Independently designed, built, and launched a mobile-first product from concept to App Store</li>
+        <li>Architected the application and all backend APIs end-to-end</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-header">
+        <h3>Android Developer</h3>
+        <span class="timeline-meta">Apr 2017 – Jan 2019</span>
+      </div>
+      <div class="timeline-company">AdaptTeQ Consulting Services</div>
+      <ul class="timeline-bullets">
+        <li>Developed Android applications in Java and Kotlin for client-facing consulting projects</li>
+        <li>Implemented REST API integrations and improved application stability across releases</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-header">
+        <h3>Software Developer</h3>
+        <span class="timeline-meta">Mar 2016 – Mar 2017</span>
+      </div>
+      <div class="timeline-company">STi SSPL</div>
+      <ul class="timeline-bullets">
+        <li>Supported Android application development and backend integration work</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-eyebrow">Selected work</div>
+  <h2>Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <div class="project-name">WorkBench</div>
+      <div class="project-desc">Real-time communication platform with AI-layer integration and production-grade architecture.</div>
+      <div class="project-stack">
+        <span class="tag">Flutter</span><span class="tag green">FastAPI</span><span class="tag green">Redis</span><span class="tag green">MongoDB</span>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <div class="project-name">Virtual Viva</div>
+      <div class="project-desc">Flutter application for iOS — interactive assessment and examination platform.</div>
+      <div class="project-stack">
+        <span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">iOS</span>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">03</div>
+      <div class="project-name">FaiRental</div>
+      <div class="project-desc">Flutter rental platform for iOS — end-to-end rental management solution.</div>
+      <div class="project-stack">
+        <span class="tag">Flutter</span><span class="tag">iOS</span><span class="tag">Firebase</span>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">04</div>
+      <div class="project-name">ForestCoin</div>
+      <div class="project-desc">Android application published on Google Play Store.</div>
+      <div class="project-stack">
+        <span class="tag">Android</span><span class="tag">Kotlin</span><span class="tag">Play Store</span>
+      </div>
+      <div class="project-arrow">↗</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-eyebrow">Let's work</div>
+  <h2>Open to remote opportunities</h2>
+  <p>Senior Flutter Engineer, Mobile Architect, and Flutter Tech Lead roles — specializing in fintech and SaaS.</p>
+  <div class="contact-links">
+    <a class="contact-link" href="mailto:prabhuc94@gmail.com">✉ prabhuc94@gmail.com</a>
+    <a class="contact-link" href="https://github.com/prabhuc94" target="_blank">⌥ github.com/prabhuc94</a>
+    <a class="contact-link" href="tel:+918870417698">☎ +91 88704 17698</a>
+  </div>
+</section>
+
+<footer>
+  <span>Prabhu Chandran — Paramakudi, Tamil Nadu, India</span>
+  <span>B.Tech CS&amp;E · SRM University · 2015</span>
+</footer>
+
+</body>
+</html>
