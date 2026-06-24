@@ -228,7 +228,8 @@ nav.solid{
   line-height:1;margin-bottom:.3rem;
   font-variant-numeric:tabular-nums;
 }
-.stat-n em{color:var(--v2);font-style:normal;}
+.stat-n em{color:#fff;font-style:normal;}
+.stat-suffix{color:var(--v2);}
 .stat-l{font-size:.72rem;color:var(--sub);letter-spacing:.1em;text-transform:uppercase;font-weight:500;}
 
 @keyframes fadeSlideUp{
@@ -549,15 +550,15 @@ footer{
 
     <div class="stats-strip">
       <div class="stat">
-        <div class="stat-n">10<em>+</em></div>
+        <div class="stat-n"><em>0</em><span class="stat-suffix">+</span></div>
         <div class="stat-l">Years exp.</div>
       </div>
       <div class="stat">
-        <div class="stat-n">8<em>×</em></div>
+        <div class="stat-n"><em>0</em><span class="stat-suffix">×</span></div>
         <div class="stat-l">Team lead</div>
       </div>
       <div class="stat">
-        <div class="stat-n">2<em>×</em></div>
+        <div class="stat-n"><em>0</em><span class="stat-suffix">×</span></div>
         <div class="stat-l">Platforms</div>
       </div>
     </div>
@@ -907,13 +908,14 @@ const obs=new IntersectionObserver(entries=>{
 document.querySelectorAll('.sr,.sr-l,.sr-r').forEach(el=>obs.observe(el));
 
 // ── COUNTER ANIMATION ──
-function animCount(el,target,suffix=''){
-  let start=0,dur=1800,startTime=null;
+function animCount(el,target){
+  let dur=1800,startTime=null;
+  const em=el.querySelector('em');
   function step(ts){
     if(!startTime)startTime=ts;
     const p=Math.min((ts-startTime)/dur,1);
     const ease=1-Math.pow(1-p,4);
-    el.querySelector('em').textContent=Math.round(ease*target)+suffix;
+    em.textContent=Math.round(ease*target);
     if(p<1)requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
@@ -922,9 +924,9 @@ const statObs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
       const ns=e.target.querySelectorAll('.stat-n');
-      ns[0]&&animCount(ns[0],10,'+');
-      ns[1]&&animCount(ns[1],8,'×');
-      ns[2]&&animCount(ns[2],2,'×');
+      ns[0]&&animCount(ns[0],10);
+      ns[1]&&animCount(ns[1],8);
+      ns[2]&&animCount(ns[2],2);
       statObs.unobserve(e.target);
     }
   });
